@@ -49,6 +49,12 @@ namespace SistemaVenta.AplicacionWeb.Controllers
                 ViewData["Mensaje"] = "No se encontraron coincidencias";
                 return View();
             }
+            // Comprobar si el usuario está activo
+            if ((bool)!usuario_encontrado.EsActivo)
+            {
+                ViewData["Mensaje"] = "El usuario está inactivo. Por favor, contacte al administrador.";
+                return View();
+            }
             ViewData["Mensaje"] = null;
 
             List<Claim> claims = new List<Claim>() {

@@ -29,6 +29,10 @@
         #texto-carga {
             color: white;
         }
+
+        #thCenter {
+            text-align: center;
+        }
     </style>
 }
 
@@ -36,7 +40,7 @@
         <div class="card-header py-3 bg-second-primary">
             <h6 class="m-0 font-weight-bold text-white">Historial de Venta</h6>
         </div>
-
+    
         <div class="card-body">
             <div class="form-row align-items-end">
                 <div class="form-group col-sm-3">
@@ -70,20 +74,59 @@
                         <thead>
                             <tr>
                                 <th>Fecha Registro</th>
-                                <th>Cliente ID</th>
+                                <th>Nombre Cliente</th>
                                 <th>Numero Venta</th>
                                 <th>Total</th>
-                                <th></th>
+                                <th id="thCenter">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                         </tbody>
                     </table>
                 </div>
-
             </div>
         </div>
     </div>
+<div class="row">
+    <div class="col-12 d-flex justify-content-center align-items-center">
+        <!-- Modal de Confirmación de Facturación -->
+        <div class="modal fade" id="modalFacturar" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <!-- Contenedor de la pantalla de carga -->
+                    <div id="pantalla-de-carga">
+                        <div class="spinner-border text-light" role="status">
+                            <span class="sr-only">Cargando...</span>
+                        </div>
+                        <div id="texto-carga" class="mt-2">Timbrando Factura...</div>
+                    </div>
+                    <!-- Mensaje de éxito -->
+                    <div id="mensaje-exito" class="alert alert-success" style="display: none;" role="alert">
+                        La facturación se realizó correctamente.
+                    </div>
+
+                    <!-- Mensaje de error -->
+                    <div id="mensaje-error" class="alert alert-danger" style="display: none;" role="alert">
+                        Error al intentar facturar.
+                    </div>
+                    <div class="modal-header">
+                        <h6 class="modal-title">Confirmación de Facturación</h6>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        ¿Estás seguro de que deseas solicitar la factura para esta venta?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success btn-sm" id="linkFacturar">Solicitar Factura</button>
+                        <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
     <!--  Modal-->
     <div class="modal fade" id="modalData" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
@@ -96,15 +139,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                <!-- Mensaje de éxito -->
-                <div id="mensaje-exito" class="alert alert-success" style="display: none;" role="alert">
-                    La facturación se realizó correctamente.
-                </div>
-
-                <!-- Mensaje de error -->
-                <div id="mensaje-error" class="alert alert-danger" style="display: none;" role="alert">
-                    Error al intentar facturar.
-                </div>
+                
                     <form>
                         <div class="row">
                             <div class="col-sm-12">
@@ -131,13 +166,11 @@
                                     <label for="txtRFC">RFC:</label>
                                     <input type="text" class="form-control form-control-sm" id="txtRFC" disabled>
                                 </div>
-                                <!-- Contenedor de la pantalla de carga -->
-                                <div id="pantalla-de-carga">
-                                    <div class="spinner-border text-light" role="status">
-                                        <span class="sr-only">Cargando...</span>
-                                    </div>
-                                    <div id="texto-carga" class="mt-2">Timbrando Factura...</div>
+                                <div class="form-group col-sm-4">
+                                    <label for="txtRFC">Correo Cliente:</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtCorreo" disabled>
                                 </div>
+                                
                                 
                                    
                                 </div>
@@ -163,7 +196,7 @@
                                                     <th>Producto</th>
                                                     <th>Cantidad</th>
                                                     <th>Precio</th>
-                                                    <th>Total</th>
+                                                    <th>Sub Total</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -176,7 +209,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                <button type="button" class="btn btn-info btn-sm" id="linkFacturar">Solicitar Factura</button>
+                <!--<button type="button" class="btn btn-info btn-sm" id="linkFacturar">Solicitar Factura</button>-->
                     <a href="#" class="btn btn-primary btn-sm" target="_blank" id="linkImprimir">Imprimir</a>
                     <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal">Cerrar</button>
                 </div>
