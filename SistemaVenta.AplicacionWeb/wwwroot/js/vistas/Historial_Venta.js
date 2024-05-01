@@ -149,6 +149,7 @@ $("#tbventa tbody").on("click", ".btn-info", function () {
 
             document.getElementById("linkFacturar").addEventListener("click", async () => {
                 let datos = "";
+                mostrarPantallaDeCarga();
                 try {
                     await obtenerInfoNegocio(); // Asumiendo que esta función devuelve la info del negocio
 
@@ -231,17 +232,21 @@ $("#tbventa tbody").on("click", ".btn-info", function () {
                     // Verificar el estado de la respuesta
                     if (response.ok) {
                         // La solicitud se realizó con éxito
-                        alert("La facturación se realizó correctamente.")
+                        mostrarMensajeExito();
                         console.log('La facturación se realizó correctamente.');
-                        location.reload()
+                        /*location.reload()*/
                     } else {
                         // Hubo un error en la solicitud
+                        mostrarMensajeError();
                         console.error('Error al intentar facturar:', response.statusText);
                     }
                    
                 } catch (error) {
                     console.error(error);
                     // Manejar errores según sea necesario
+                } finally {
+                    // Ocultar pantalla de carga
+                    ocultarPantallaDeCarga();
                 }
             });
 
@@ -296,7 +301,7 @@ function obtenerInfoNegocio() {
 
 function generarXML(datos) {
     let xml = `<Comprobante>`;
-    xml += `<idLocal>Pruebas-20${datos.Venta.idLocal}</idLocal>`;
+    xml += `<idLocal>Pruebas-10${datos.Venta.idLocal}</idLocal>`;
     xml += `<version>${datos.Venta.version}</version>`;
     xml += `<serie/>`;
     xml += `<folio>${datos.Venta.folio}</folio>`;
@@ -408,3 +413,22 @@ function generarXML(datos) {
 
 //    return xml;
 //}
+
+function mostrarPantallaDeCarga() {
+    // Mostrar la pantalla de carga
+    document.getElementById('pantalla-de-carga').style.display = 'flex';
+}
+
+function ocultarPantallaDeCarga() {
+    // Ocultar la pantalla de carga
+    document.getElementById('pantalla-de-carga').style.display = 'none';
+}
+function mostrarMensajeExito() {
+    // Mostrar mensaje de éxito
+    document.getElementById('mensaje-exito').style.display = 'block';
+}
+
+function mostrarMensajeError() {
+    // Mostrar mensaje de error
+    document.getElementById('mensaje-error').style.display = 'block';
+}

@@ -17,17 +17,14 @@ namespace SistemaVenta.AplicacionWeb.Controllers
                 string user = "FIME";
                 string password = "s9%4ns7q#eGq";
 
-                Console.Write("Hola Mundo Sobre Linea 1");
-                Console.Write("EL XML 2 CONTIENE" + xmlGenerado);
-                
 
                 // Crear una instancia del cliente del servicio web
                 var client = new TimbradoSoapClient(TimbradoSoapClient.EndpointConfiguration.TimbradoSoap);
-                
+
 
                 // Llamar al método del servicio web y procesar la respuesta
-                TimbradoService.TimbrarFResponse response = await client.TimbrarFAsync(user , password, xmlGenerado);
-                Console.Write("Hola Mundo Sobre Linea 4");
+                TimbradoService.TimbrarFResponse response = await client.TimbrarFAsync(user, password, xmlGenerado);
+
 
                 // Obtener los bytes de la respuesta
                 byte[] resultadoTimbradoBytes = response.Body.TimbrarFResult;
