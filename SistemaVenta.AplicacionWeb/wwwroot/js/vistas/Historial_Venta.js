@@ -250,15 +250,15 @@ $("#tbventa tbody").on("click", ".btn-warning", function () {
                         // La solicitud se realizó con éxito
                         mostrarMensajeExito();
                         console.log('La facturación se realizó correctamente.');
-                        setTimeout(() => {
-                            location.reload();
-                        }, 2000);
+                        //setTimeout(() => {
+                        //    location.reload();
+                        //}, 2000);
                     } else {
                         // Hubo un error en la solicitud
                         mostrarMensajeError();
-                        setTimeout(() => {
-                            location.reload();
-                        }, 1000);
+                        //setTimeout(() => {
+                        //    location.reload();
+                        //}, 1000);
                         console.error('Error al intentar facturar:', response.statusText);
                     }
 
@@ -481,7 +481,7 @@ function obtenerInfoNegocio() {
 
 function generarXML(datos) {
     let xml = `<Comprobante>`;
-    xml += `<idLocal>Pruebas-13${datos.Venta.idLocal}</idLocal>`;
+    xml += `<idLocal>INTERFACESPRUEBAS1-${datos.Venta.idLocal}</idLocal>`;
     xml += `<version>${datos.Venta.version}</version>`;
     xml += `<serie/>`;
     xml += `<folio>${datos.Venta.folio}</folio>`;
